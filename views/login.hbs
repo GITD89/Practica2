@@ -1,7 +1,8 @@
 <body
   class="bg-gradient-primary"
   style="
-      background-image: url('/img/Centro-de-Tecnología-Aplicada.jpg');">
+      background-image: url('/img/Centro-de-Tecnología-Aplicada.jpg');"
+>
   <style>
     .custom-login-container { height: 100vh ; display: flex ; flex-direction:
     column ; justify-content: center ; }
@@ -26,12 +27,13 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Iniciar Sesión</h1>
                   </div>
-                  <form class="user">
+                  <form class="user" action="/iniciar-sesion" method="post">
                     <div class="form-group">
                       <input
                         type="email"
                         class="form-control form-control-user"
                         id="exampleInputEmail"
+                        name="email"
                         aria-describedby="emailHelp"
                         placeholder="Ingresa tu correo institucional"
                         required
@@ -43,6 +45,7 @@
                         class="form-control form-control-user"
                         id="exampleInputPassword"
                         placeholder="Ingresa tu contraseña"
+                        name="password"
                         required
                       />
                     </div>
