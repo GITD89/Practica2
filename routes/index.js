@@ -56,6 +56,15 @@ router.get("/iniciar-sesion", function (req, res, next) {
   res.render("login", { title: "Iniciar Sesión" });
 });
 
+router.get("/cerrar-sesion", async function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/iniciar-sesion");
+  });
+});
+
 // RUTAS POST
 router.post(
   "/iniciar-sesion",
