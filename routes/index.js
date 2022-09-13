@@ -49,7 +49,17 @@ const isAuth = async (req, res, next) => {
 
 // RUTAS GET
 router.get("/", isAuth, function (req, res, next) {
-  res.render("index", { title: "Dashboard" });
+  // DEFINIR EL TIPO DE USUARIO
+  const letter = req.user.email[0];
+
+  res.render("index", {
+    title: "Dashboard",
+    type: {
+      student: letter === "a",
+      teacher: letter === "f",
+      coordinator: letter === "c",
+    },
+  });
 });
 
 router.get("/iniciar-sesion", function (req, res, next) {
