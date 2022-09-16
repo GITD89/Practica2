@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+const bcrypt = require("bcrypt");
 
 const dbName = "practica_2";
 const accountCollName = "cuentas";
@@ -26,4 +27,17 @@ const userExists = async (email) => {
   };
 };
 
-module.exports = { userExists, client };
+const darDeAltaAlumno = async (user) => {
+  const collection = await getAccountsCollection();
+  let res = await collection.findOne({ student: user.email });
+
+  if (!res) {
+    var hashpass = await bcrypt.hash(user.pass, 10);
+    await collection.insertOne({
+      email: user.email,
+      password: hashpass,
+    });
+  }
+};
+
+module.exports = { userExists, client, darDeAltaAlumno };

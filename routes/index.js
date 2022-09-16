@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { userExists, client } = require("../db/mongo");
+const { userExists, client, darDeAltaAlumno } = require("../db/mongo");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
@@ -90,6 +90,12 @@ router.get("/perfiles/:id", function (req, res, next) {
   res.render("perfiles", { title: `Perfil de maestro`, type });
 });
 
+router.get("/alta-alumno", function (req, res, next) {
+  const type = getUserType(req);
+
+  res.render("altaAlumno", { title: `Dar de alta alumno`, type });
+});
+
 router.get("/cerrar-sesion", async function (req, res, next) {
   req.logout(function (err) {
     if (err) {
@@ -107,5 +113,13 @@ router.post(
     res.redirect(`/`);
   }
 );
+
+router.post("/alta-alumno", async function (req, res, next) {
+  await darDeAltaAlumno(req.body);
+
+  client.close();
+
+  res.redirect("/");
+});
 
 module.exports = router;
