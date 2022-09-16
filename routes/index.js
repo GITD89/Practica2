@@ -96,6 +96,12 @@ router.get("/alta-alumno", function (req, res, next) {
   res.render("altaAlumno", { title: `Dar de alta alumno`, type });
 });
 
+router.get("/alta-maestro", function (req, res, next) {
+  const type = getUserType(req);
+
+  res.render("altaMaestro", { title: `Dar de alta maestro`, type });
+});
+
 router.get("/cerrar-sesion", async function (req, res, next) {
   req.logout(function (err) {
     if (err) {
@@ -115,6 +121,14 @@ router.post(
 );
 
 router.post("/alta-alumno", async function (req, res, next) {
+  await darDeAltaAlumno(req.body);
+
+  client.close();
+
+  res.redirect("/");
+});
+
+router.post("/alta-maestro", async function (req, res, next) {
   await darDeAltaAlumno(req.body);
 
   client.close();
