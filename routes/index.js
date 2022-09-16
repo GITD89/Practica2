@@ -5,6 +5,17 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
 
+const getUserType = (req) => {
+  // DEFINIR EL TIPO DE USUARIO
+  const letter = req.user.email[0];
+
+  return {
+    student: letter === "a",
+    teacher: letter === "f",
+    coordinator: letter === "c",
+  };
+};
+
 //PASSPORT
 passport.use(
   new LocalStrategy(
@@ -49,21 +60,22 @@ const isAuth = async (req, res, next) => {
 
 // RUTAS GET
 router.get("/", isAuth, function (req, res, next) {
-  // DEFINIR EL TIPO DE USUARIO
-  const letter = req.user.email[0];
+  const type = getUserType(req);
 
   res.render("index", {
     title: "Dashboard",
-    type: {
-      student: letter === "a",
-      teacher: letter === "f",
-      coordinator: letter === "c",
-    },
+    type,
   });
 });
 
 router.get("/iniciar-sesion", function (req, res, next) {
   res.render("login", { title: "Iniciar Sesión" });
+});
+
+router.get("/semestre/:id", function (req, res, next) {
+  const type = getUserType(req);
+
+  res.render("semestre", { title: `Semestre ${req.params.id}`, type });
 });
 
 router.get("/cerrar-sesion", async function (req, res, next) {
