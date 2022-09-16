@@ -84,6 +84,12 @@ router.get("/periodo/:id", function (req, res, next) {
   res.render("periodo", { title: `Periodo ${req.params.id}`, type });
 });
 
+router.get("/perfiles/:id", function (req, res, next) {
+  const type = getUserType(req);
+
+  res.render("perfiles", { title: `Perfil de maestro`, type });
+});
+
 router.get("/cerrar-sesion", async function (req, res, next) {
   req.logout(function (err) {
     if (err) {
