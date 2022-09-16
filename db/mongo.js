@@ -40,4 +40,9 @@ const darDeAltaAlumno = async (user) => {
   }
 };
 
-module.exports = { userExists, client, darDeAltaAlumno };
+const darDeBajaAlumno = async (user) => {
+  const collection = await getAccountsCollection();
+  await collection.deleteOne({ email: user.email });
+};
+
+module.exports = { userExists, client, darDeAltaAlumno, darDeBajaAlumno };

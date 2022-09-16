@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { userExists, client, darDeAltaAlumno } = require("../db/mongo");
+const {
+  userExists,
+  client,
+  darDeAltaAlumno,
+  darDeBajaAlumno,
+} = require("../db/mongo");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
@@ -102,6 +107,18 @@ router.get("/alta-maestro", function (req, res, next) {
   res.render("altaMaestro", { title: `Dar de alta maestro`, type });
 });
 
+router.get("/baja-alumno", function (req, res, next) {
+  const type = getUserType(req);
+
+  res.render("bajaAlumno", { title: `Dar de baja alumno`, type });
+});
+
+router.get("/baja-maestro", function (req, res, next) {
+  const type = getUserType(req);
+
+  res.render("bajaMaestro", { title: `Dar de baja maestro`, type });
+});
+
 router.get("/cerrar-sesion", async function (req, res, next) {
   req.logout(function (err) {
     if (err) {
@@ -130,6 +147,22 @@ router.post("/alta-alumno", async function (req, res, next) {
 
 router.post("/alta-maestro", async function (req, res, next) {
   await darDeAltaAlumno(req.body);
+
+  client.close();
+
+  res.redirect("/");
+});
+
+router.post("/baja-alumno", async function (req, res, next) {
+  await darDeBajaAlumno(req.body);
+
+  client.close();
+
+  res.redirect("/");
+});
+
+router.post("/baja-maestro", async function (req, res, next) {
+  await darDeBajaAlumno(req.body);
 
   client.close();
 
