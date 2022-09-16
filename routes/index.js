@@ -78,6 +78,12 @@ router.get("/semestre/:id", function (req, res, next) {
   res.render("semestre", { title: `Semestre ${req.params.id}`, type });
 });
 
+router.get("/periodo/:id", function (req, res, next) {
+  const type = getUserType(req);
+
+  res.render("periodo", { title: `Periodo ${req.params.id}`, type });
+});
+
 router.get("/cerrar-sesion", async function (req, res, next) {
   req.logout(function (err) {
     if (err) {
