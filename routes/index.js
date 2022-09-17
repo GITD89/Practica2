@@ -119,6 +119,12 @@ router.get("/baja-maestro", function (req, res, next) {
   res.render("bajaMaestro", { title: `Dar de baja maestro`, type });
 });
 
+router.get("/asignar-aula", function (req, res, next) {
+  const type = getUserType(req);
+
+  res.render("asignarAula", { title: `Asignar aula`, type });
+});
+
 router.get("/cerrar-sesion", async function (req, res, next) {
   req.logout(function (err) {
     if (err) {
@@ -165,6 +171,12 @@ router.post("/baja-maestro", async function (req, res, next) {
   await darDeBajaAlumno(req.body);
 
   client.close();
+
+  res.redirect("/");
+});
+
+router.post("/asignar-aula", async function (req, res, next) {
+  console.log(req.body);
 
   res.redirect("/");
 });
