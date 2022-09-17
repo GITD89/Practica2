@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr id="perfiles-table">
       <td>Israel Jimenez</td>
       <th scope="row">Humanidades</th>
       <td>Docencia superior</td>
@@ -18,4 +18,40 @@
     </tr>
   </tbody>
 </table>
+
+<script>
+  fetch("/perfiles")
+  .then((res) => {
+    return res.json();
+  })
+  .then((data) => {
+    const pathSeparated = location.pathname.split("/");
+
+    let perfil = null;
+    let html = "";
+
+    for (let i = 0; i < data.perfiles.length; i++) {
+      const name = data.perfiles[i].nombre.toLowerCase().replace(" ", "-");
+
+      if (name == pathSeparated[pathSeparated.length - 1]) {
+        perfil = data.perfiles[i];
+        break;
+      }
+    }
+
+    html += `
+      <td>${perfil.nombre}</td>
+      <th scope="row">${perfil.area}</th>
+      <td>${perfil.maestria}</td>
+      <td>${perfil.experiencia}</td>
+    `;
+    const table = document.getElementById("perfiles-table");
+    table.innerHTML = html
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+</script>
+
 {{/sidebar}}

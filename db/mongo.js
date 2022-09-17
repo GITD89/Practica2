@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 
 const dbName = "practica_2";
 const accountCollName = "cuentas";
+const profileCollName = "perfiles";
 const url = "mongodb://localhost:27017";
 
 const client = new MongoClient(url);
@@ -11,6 +12,14 @@ const getAccountsCollection = async () => {
   await client.connect();
   const db = client.db(dbName);
   const collection = db.collection(accountCollName);
+
+  return collection;
+};
+
+const getCustomCollection = async (name) => {
+  await client.connect();
+  const db = client.db(dbName);
+  const collection = db.collection(name);
 
   return collection;
 };
@@ -45,4 +54,18 @@ const darDeBajaAlumno = async (user) => {
   await collection.deleteOne({ email: user.email });
 };
 
-module.exports = { userExists, client, darDeAltaAlumno, darDeBajaAlumno };
+const obtenerPerfiles = async () => {
+  const collection = await getCustomCollection(profileCollName);
+
+  const data = await collection.find({}).toArray();
+
+  return data;
+};
+
+module.exports = {
+  userExists,
+  client,
+  darDeAltaAlumno,
+  darDeBajaAlumno,
+  obtenerPerfiles,
+};

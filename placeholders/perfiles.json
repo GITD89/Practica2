@@ -1,0 +1,38 @@
+[
+  {
+    "nombre": "Israel Jimenez",
+    "area": "Matemática",
+    "maestria": "Videojuegos",
+    "experiencia": "3"
+  },
+  {
+    "nombre": "Jesus del Toro",
+    "area": "Matemática",
+    "maestria": "Machine Learning",
+    "experiencia": "5"
+  },
+  {
+    "nombre": "Jesus Huereca",
+    "area": "Social",
+    "maestria": "Administracion de Empresas",
+    "experiencia": "3"
+  },
+  {
+    "nombre": "Rafael Gomez",
+    "area": "Matemática",
+    "maestria": "Marketing Digital",
+    "experiencia": "4"
+  },
+  {
+    "nombre": "Mario Hernandez",
+    "area": "Administración",
+    "maestria": "Big Data",
+    "experiencia": "7"
+  },
+  {
+    "nombre": "Juan Hernandez",
+    "area": "Humanidades",
+    "maestria": "Educación",
+    "experiencia": "4"
+  }
+]

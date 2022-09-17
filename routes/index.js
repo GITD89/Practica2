@@ -5,6 +5,7 @@ const {
   client,
   darDeAltaAlumno,
   darDeBajaAlumno,
+  obtenerPerfiles,
 } = require("../db/mongo");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -64,7 +65,7 @@ const isAuth = async (req, res, next) => {
 };
 
 // RUTAS GET
-router.get("/", isAuth, function (req, res, next) {
+router.get("/", isAuth, async function (req, res, next) {
   const type = getUserType(req);
 
   res.render("index", {
@@ -131,6 +132,16 @@ router.get("/cerrar-sesion", async function (req, res, next) {
       return next(err);
     }
     res.redirect("/iniciar-sesion");
+  });
+});
+
+router.get("/perfiles", async function (req, res, next) {
+  const perfiles = await obtenerPerfiles();
+
+  client.close();
+
+  res.json({
+    perfiles,
   });
 });
 
