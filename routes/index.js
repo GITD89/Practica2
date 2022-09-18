@@ -6,6 +6,9 @@ const {
   darDeAltaAlumno,
   darDeBajaAlumno,
   obtenerPerfiles,
+  insertarHorario,
+  getHorarioPerTeacher,
+  getHorarioPerStudent,
 } = require("../db/mongo");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -78,10 +81,11 @@ router.get("/iniciar-sesion", function (req, res, next) {
   res.render("login", { title: "Iniciar Sesión" });
 });
 
-router.get("/semestre/:id", function (req, res, next) {
+router.get("/mi-horario", function (req, res, next) {
   const type = getUserType(req);
+  const matricula = req.user.email.split("@")[0];
 
-  res.render("semestre", { title: `Semestre ${req.params.id}`, type });
+  res.render("semestre", { title: `Mi Horario`, type, matricula });
 });
 
 router.get("/periodo/:id", function (req, res, next) {
@@ -123,6 +127,8 @@ router.get("/baja-maestro", function (req, res, next) {
 router.get("/asignar-aula", function (req, res, next) {
   const type = getUserType(req);
 
+  console.log(req.body);
+
   res.render("asignarAula", { title: `Asignar aula`, type });
 });
 
@@ -142,6 +148,26 @@ router.get("/perfiles", async function (req, res, next) {
 
   res.json({
     perfiles,
+  });
+});
+
+router.get("/horario-maestro/:id", async function (req, res, next) {
+  const horario = await getHorarioPerTeacher(req.params.id);
+
+  client.close();
+
+  res.json({
+    horario,
+  });
+});
+
+router.get("/horario-alumno/:id", async function (req, res, next) {
+  const horario = await getHorarioPerStudent(req.params.id);
+
+  client.close();
+
+  res.json({
+    horario,
   });
 });
 
@@ -187,7 +213,7 @@ router.post("/baja-maestro", async function (req, res, next) {
 });
 
 router.post("/asignar-aula", async function (req, res, next) {
-  console.log(req.body);
+  await insertarHorario(req.body);
 
   res.redirect("/");
 });

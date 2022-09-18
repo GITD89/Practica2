@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const dbName = "practica_2";
 const accountCollName = "cuentas";
 const profileCollName = "perfiles";
+const timeCollName = "horarios";
 const url = "mongodb://localhost:27017";
 
 const client = new MongoClient(url);
@@ -62,10 +63,35 @@ const obtenerPerfiles = async () => {
   return data;
 };
 
+const insertarHorario = async (data) => {
+  const collection = await getCustomCollection(timeCollName);
+
+  await collection.insertOne(data);
+};
+
+const getHorarioPerStudent = async (matricula) => {
+  const collection = await getCustomCollection(timeCollName);
+
+  const data = await collection.find({ alumno: matricula }).toArray();
+
+  return data;
+};
+
+const getHorarioPerTeacher = async (matricula) => {
+  const collection = await getCustomCollection(timeCollName);
+
+  const data = await collection.find({ teacher: matricula }).toArray();
+
+  return data;
+};
+
 module.exports = {
   userExists,
   client,
   darDeAltaAlumno,
   darDeBajaAlumno,
   obtenerPerfiles,
+  insertarHorario,
+  getHorarioPerStudent,
+  getHorarioPerTeacher,
 };
