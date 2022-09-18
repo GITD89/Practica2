@@ -74,6 +74,7 @@ router.get("/", isAuth, async function (req, res, next) {
   res.render("index", {
     title: "Dashboard",
     type,
+    nombre: req.user.email,
   });
 });
 
