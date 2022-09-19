@@ -1,0 +1,55 @@
+{{#> sidebar }}
+<input type="hidden" id="alumnoMatricula" value={{matricula}}>
+<h1>{{title}}</h1>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Inicio</th>
+      <th scope="col">Clase</th>
+      <th scope="col">Aula</th>
+      <th scope="col">Duración (Semanas)</th>
+      <th scope="col">Duración (Horas)</th>
+    </tr>
+  </thead>
+  <tbody id="semestres-container">
+  </tbody>
+</table>
+
+<script>
+  const aulas = ["CIP 1 A", "CIP 1 B", "CIP 2 A", "CIP 2 B", "CTA A", "CTA B", "CTA C", "CTA D"];
+
+  const matContainer = document.getElementById("alumnoMatricula").value;
+
+  console.log(matContainer);
+
+  fetch(`/horario-maestro/${matContainer}`)
+  .then((res) => {
+    return res.json();
+  })
+  .then((data) => {
+    console.log(data.horario);
+
+    let html = "";
+
+    for (let i = 0; i < data.horario.length; i++) {
+      html += `
+        <tr>
+          <th scope="row">${(new Date(data.horario[i].date).toLocaleString())}</th>
+          <td>${data.horario[i].class}</td>
+          <td>${aulas[data.horario[i].room - 1]}</td>
+          <td>${data.horario[i].weeks}</td>
+          <td>${data.horario[i].hours}</td>
+        </tr>
+      `;
+    }
+
+    const container = document.getElementById("semestres-container");
+    container.innerHTML = html;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+</script>
+
+{{/sidebar}}

@@ -89,6 +89,13 @@ router.get("/mi-horario", function (req, res, next) {
   res.render("semestre", { title: `Mi Horario`, type, matricula });
 });
 
+router.get("/mis-clases", function (req, res, next) {
+  const type = getUserType(req);
+  const matricula = req.user.email.split("@")[0];
+
+  res.render("misClases", { title: `Mis Clases`, type, matricula });
+});
+
 router.get("/periodo/:id", function (req, res, next) {
   const type = getUserType(req);
 
