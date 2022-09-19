@@ -3,31 +3,31 @@
 <form action="/asignar-aula" method="post">
   <div class="form-group">
     <label for="date">Horario (Inicio)</label>
-    <input type="datetime-local" class="form-control" id="date" name="date">
+    <input type="datetime-local" class="form-control" id="date" name="date" required>
   </div>
   <div class="form-group">
     <label for="dur">Duración (Horas)</label>
-    <input type="number" class="form-control" id="dur" name="hours">
+    <input type="number" class="form-control" id="dur" name="hours" required>
   </div>
       <div class="form-group">
     <label for="sem">Duración (Semanas)</label>
-    <input type="number" class="form-control" id="sem" name="weeks">
+    <input type="number" class="form-control" id="sem" name="weeks" required>
   </div>
   <div class="form-group">
     <label for="class">Clase/Actividad</label>
-    <input type="text" class="form-control" id="class" name="class">
+    <input type="text" class="form-control" id="class" name="class" required>
   </div>
   <div class="form-group">
     <label for="alumno">Matricula del alumno</label>
-    <input type="text" class="form-control" id="alumno" name="alumno">
+    <input type="text" class="form-control" id="alumno" name="alumno" required>
   </div>
   <div class="form-group">
     <label for="teacher">Matricula del maestro</label>
-    <input type="text" class="form-control" id="teacher" name="teacher">
+    <input type="text" class="form-control" id="teacher" name="teacher" required>
   </div>
     <div class="form-group">
-    <select class="custom-select" name="room">
-      <option selected>Aula</option>
+    <label for="room">Aula</label>
+    <select class="custom-select" name="room" required>
       <option value="1">CIP 1 A</option>
       <option value="2">CIP 1 B</option>
       <option value="3">CIP 2 A</option>
@@ -39,8 +39,8 @@
     </select>
   </div>
   <div class="form-group">
-    <select class="custom-select" name="carrera">
-      <option selected>Carrera</option>
+    <label for="carrera">Carrera</label>
+    <select id="carrera" class="custom-select" name="carrera" required>
       <option value="1">ISC</option>
       <option value="2">IM</option>
       <option value="3">ISA</option>
