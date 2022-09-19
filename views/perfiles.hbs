@@ -1,8 +1,8 @@
 {{#> sidebar }}
 <h1>{{title}}</h1>
-<table class="table">
+<table class="table table-bordered table-dark">
   <thead class="thead-dark">
-    <tr>
+    <tr >
       <th scope="col">Nombre</th>
       <th scope="col">Area</th>
       <th scope="col">Maestria/Doctorado</th>
@@ -40,10 +40,10 @@
     }
 
     html += `
-      <td>${perfil.nombre}</td>
-      <th scope="row">${perfil.area}</th>
-      <td>${perfil.maestria}</td>
-      <td>${perfil.experiencia}</td>
+      <td class="bg-success" >${perfil.nombre}</td>
+      <th class="bg-success" scope="row">${perfil.area}</th>
+      <td class="bg-success">${perfil.maestria}</td>
+      <td class="bg-success">${perfil.experiencia}</td>
     `;
     const table = document.getElementById("perfiles-table");
     table.innerHTML = html

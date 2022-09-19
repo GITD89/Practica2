@@ -1,7 +1,7 @@
 {{#> sidebar }}
 <input type="hidden" id="alumnoMatricula" value={{matricula}}>
 <h1>{{title}}</h1>
-<table class="table">
+<table class="table table-bordered table-dark">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Inicio</th>
@@ -34,11 +34,11 @@
     for (let i = 0; i < data.horario.length; i++) {
       html += `
         <tr>
-          <th scope="row">${(new Date(data.horario[i].date).toLocaleString())}</th>
-          <td>${data.horario[i].class}</td>
-          <td>${aulas[data.horario[i].room - 1]}</td>
-          <td>${data.horario[i].weeks}</td>
-          <td>${data.horario[i].hours}</td>
+          <th class="bg-success" scope="row">${(new Date(data.horario[i].date).toLocaleString())}</th>
+          <td class="bg-success">${data.horario[i].class}</td>
+          <td class="bg-success">${aulas[data.horario[i].room - 1]}</td>
+          <td class="bg-success">${data.horario[i].weeks}</td>
+          <td class="bg-success">${data.horario[i].hours}</td>
         </tr>
       `;
     }

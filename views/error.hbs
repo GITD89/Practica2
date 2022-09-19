@@ -1,5 +1,16 @@
-<h1></h1>
+{{!-- <div class="alert alert-danger" role="alert">
+  This is a danger alert—check it out!
+</div>
+<h1>Este error es una prueba</h1>
 
 <h1>{{message}}</h1>
 <h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<pre>{{error.stack}}</pre> --}}
+
+<div
+  class="w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+>
+  <h1 class="text-danger">¡Lo siento! ¡Ha ocurrido un error!</h1>
+  <h4 class="text-danger">Mensaje: {{message}}</h4>
+  <h2>{{error.status}}</h2>
+</div>
