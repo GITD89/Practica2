@@ -10,7 +10,7 @@ fetch("/perfiles")
         i
       ].nombre
         .toLowerCase()
-        .replace(" ", "-")}">${data.perfiles[i].nombre}</a>`;
+        .replaceAll(" ", "-")}">${data.perfiles[i].nombre}</a>`;
     }
 
     const contenedor = document.getElementById("perfiles-links");

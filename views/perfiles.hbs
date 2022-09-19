@@ -31,7 +31,7 @@
     let html = "";
 
     for (let i = 0; i < data.perfiles.length; i++) {
-      const name = data.perfiles[i].nombre.toLowerCase().replace(" ", "-");
+      const name = data.perfiles[i].nombre.toLowerCase().replaceAll(" ", "-");
 
       if (name == pathSeparated[pathSeparated.length - 1]) {
         perfil = data.perfiles[i];
