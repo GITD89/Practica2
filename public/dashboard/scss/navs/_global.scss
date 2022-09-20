@@ -26,6 +26,13 @@
     // Counter for nav links and nav link image sizing
     .nav-link {
       position: relative;
+      #userDropdown{
+        width: 25rem;
+    input {
+      font-size: 0.85rem;
+      height: auto;
+    }
+      }
       .badge-counter {
         position: absolute;
         transform: scale(0.7);
