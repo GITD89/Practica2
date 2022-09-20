@@ -2,7 +2,15 @@
 <h1 class="text-center">¡Bienvenido a la plataforma UAL!</h1>
 <div class="d-flex p-2 justify-content-center flex-column align-items-center" style="max-width:800px; text-align: center; margin: 0 auto">
   <img width="650px" style="border-radius: 8px;"  src="/img/UALSquare.jpg" alt="UAL">
-  <h3 class="mt-4">Aqui podrás visualizar tus horarios del área de ingenierías. Accede como: Coordinador, maestro o estudiante.</h3>
+  {{#if type.student}}
+  <h3 class="mt-4">Como estudiante, aquí podrás visualizar tus horarios de clase del área de ingenierías.</h3>
+  {{/if}}
+  {{#if type.teacher}}
+  <h3 class="mt-4">Como maestro, aquí podrás visualizar las clases que impartiras en el área de ingenierías.</h3>
+  {{/if}}
+  {{#if type.coordinator}}
+  <h3 class="mt-4">Como coordinador, aquí podrás asignar los horarios tanto para maestros como estudiantes.</h3>
+  {{/if}}
 </div>
 
 {{/sidebar}}
