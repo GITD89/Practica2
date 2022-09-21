@@ -1,6 +1,7 @@
 {{#> sidebar }}
 <input type="hidden" id="alumnoMatricula" value={{matricula}}>
 <h1>{{title}}</h1>
+<div class="table-responsive">
 <table class="table table-bordered table-dark">
   <thead class="thead-dark">
     <tr>
@@ -14,6 +15,9 @@
   <tbody id="semestres-container">
   </tbody>
 </table>
+
+</div>
+
 
 <script>
   const aulas = ["Aula 1 Ing (CTA)", "Aula 2 Ing (CTA)", "Aula Soluciones Digitales 4 (CTA)", "Aula Soluciones Digitales 3 (CTA)", "Aula 1 (CIP)", "Aula 2 (CIP)", "Aula 3 (CIP)", "Aula 4 (CIP)", "Aula 5 (CIP)", "Taller 1 (CIP)"];
