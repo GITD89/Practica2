@@ -9,6 +9,8 @@ const {
   insertarHorario,
   getHorarioPerTeacher,
   getHorarioPerStudent,
+  subirPerfil,
+  removerPerfil,
 } = require("../db/mongo");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -199,6 +201,16 @@ router.post("/alta-alumno", async function (req, res, next) {
 router.post("/alta-maestro", async function (req, res, next) {
   await darDeAltaAlumno(req.body);
 
+  const matricula = req.body.email.split("@")[0];
+
+  await subirPerfil({
+    nombre: req.body.name,
+    maestria: req.body.maestria,
+    experiencia: req.body.experiencia,
+    area: req.body.area,
+    matricula,
+  });
+
   client.close();
 
   res.redirect("/");
@@ -214,6 +226,10 @@ router.post("/baja-alumno", async function (req, res, next) {
 
 router.post("/baja-maestro", async function (req, res, next) {
   await darDeBajaAlumno(req.body);
+
+  const matricula = req.body.email.split("@")[0];
+
+  await removerPerfil(matricula);
 
   client.close();
 

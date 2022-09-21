@@ -85,6 +85,17 @@ const getHorarioPerTeacher = async (matricula) => {
   return data;
 };
 
+const subirPerfil = async (perfil) => {
+  const collection = await getCustomCollection(profileCollName);
+
+  await collection.insertOne(perfil);
+};
+
+const removerPerfil = async (matricula) => {
+  const collection = await getCustomCollection(profileCollName);
+  await collection.deleteOne({ matricula: matricula });
+};
+
 module.exports = {
   userExists,
   client,
@@ -94,4 +105,6 @@ module.exports = {
   insertarHorario,
   getHorarioPerStudent,
   getHorarioPerTeacher,
+  subirPerfil,
+  removerPerfil,
 };
