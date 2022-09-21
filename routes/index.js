@@ -11,6 +11,7 @@ const {
   getHorarioPerStudent,
   subirPerfil,
   removerPerfil,
+  removerClase,
 } = require("../db/mongo");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -238,6 +239,14 @@ router.post("/baja-maestro", async function (req, res, next) {
 
 router.post("/asignar-aula", async function (req, res, next) {
   await insertarHorario(req.body);
+
+  res.redirect("/");
+});
+
+router.post("/eliminar-clase/:id", async function (req, res, next) {
+  console.log("removiendo");
+  await removerClase(req.params.id);
+  console.log("removiendo");
 
   res.redirect("/");
 });

@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
 
 const dbName = "practica_2";
@@ -96,6 +96,11 @@ const removerPerfil = async (matricula) => {
   await collection.deleteOne({ matricula: matricula });
 };
 
+const removerClase = async (id) => {
+  const collection = await getCustomCollection(timeCollName);
+  await collection.deleteOne({ _id: new ObjectId(id) });
+};
+
 module.exports = {
   userExists,
   client,
@@ -107,4 +112,5 @@ module.exports = {
   getHorarioPerTeacher,
   subirPerfil,
   removerPerfil,
+  removerClase,
 };

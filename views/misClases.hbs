@@ -10,6 +10,7 @@
       <th scope="col">Aula</th>
       <th scope="col">Duración (Semanas)</th>
       <th scope="col">Duración (Horas)</th>
+      <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody id="semestres-container">
@@ -24,23 +25,39 @@
 
   console.log(matContainer);
 
+  const test = (id) => {
+    fetch(`/eliminar-clase/${id}`, { method: "POST" })
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      location.reload(true);
+    });
+  };
+
   fetch(`/horario-maestro/${matContainer}`)
   .then((res) => {
     return res.json();
   })
   .then((data) => {
-    console.log(data.horario);
-
     let html = "";
 
     for (let i = 0; i < data.horario.length; i++) {
       html += `
         <tr>
+          <input type="hidden" id="classID" value="${data.horario[i]._id}">
           <th class="bg-success" scope="row">${(new Date(data.horario[i].date).toLocaleString())}</th>
           <td class="bg-success">${data.horario[i].class}</td>
           <td class="bg-success">${aulas[data.horario[i].room - 1]}</td>
           <td class="bg-success">${data.horario[i].weeks}</td>
           <td class="bg-success">${data.horario[i].hours}</td>
+          <td class="bg-success"><button id="classDelete" onClick="test('${data.horario[i]._id}')" class="btn btn-danger">Eliminar</button></td>
         </tr>
       `;
     }
@@ -51,6 +68,7 @@
   .catch((err) => {
     console.log(err);
   });
+
 
 </script>
 
